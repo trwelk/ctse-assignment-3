@@ -12,7 +12,7 @@ env:
   GKE_CLUSTER: ctse-abc-cluster	
   GKE_ZONE: us-central1	   # TODO: update to cluster zone
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  K8S_FOLDER: ./k8s
+  K8S_FOLDER: ./K8S
   FRONTEND_IMAGE: ${{secrets.DOCKER_USER}}/abc-frontend-app
   BACKEND_IMAGE: ${{secrets.DOCKER_USER}}/abc-product-backend-app
 jobs:
@@ -72,6 +72,7 @@ jobs:
       run: |-
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
+        ls
         working-directory: ${{ env.K8S_FOLDER }}
 
       # Deploy the Docker image to the GKE cluster
