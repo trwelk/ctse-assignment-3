@@ -14,12 +14,21 @@ jobs:
     - name: docker login
       run: | # log into docker hub account
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
-    - name: Build the frontend Docker image # push The image to the docker hub
-      run: docker build . --file ./abc-frontend-app/Dockerfile --tag $DOCKER_USER/$FRONTEND_REPO_NAME:$(date +%s) .
-    - name: Docker Push
-      run: docker push $DOCKER_USER/$FRONTEND_REPO_NAME:$(date +%s)
+
       
-    - name: Build the product Docker image # push The image to the docker hub
-      run: docker build . --file ./abc-product-backend-app/Dockerfile --tag $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:$(date +%s) .
-    - name: Docker Push
-      run: docker push $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:$(date +%s)
+      
+    - name: Build frontend image and push to Docker Hub and GitHub Container Registry
+      uses: docker/build-push-action@v2
+      with:
+        context: ./abc-frontend-app
+        push: true
+        tags: $DOCKER_USER/$FRONTEND_REPO_NAME:$(date +%s)
+        
+      
+    - name: Build product image and push to Docker Hub and GitHub Container Registry
+      uses: docker/build-push-action@v2
+      with:
+        context: ./abc-product-backend-app
+        push: true
+        tags: $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:$(date +%s)
+
