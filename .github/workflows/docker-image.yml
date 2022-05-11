@@ -1,0 +1,25 @@
+name: This a workflow title 
+on: [push] # When pushing to any branch then run this action
+# Env variable
+env:
+  DOCKER_USER: ${{secrets.DOCKER_USER}}
+  DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  FRONTEND_REPO_NAME: abc-frontend-app
+  PRODUCT_BACKEND_REPO_NAME: abc-product-backend-app
+jobs:
+  push-image-to-docker-hub-and-deploy:  # job name
+    runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
+    steps:
+    - uses: actions/checkout@v2 # first action : checkout source code
+    - name: docker login
+      run: | # log into docker hub account
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
+    - name: Build the frontend Docker image # push The image to the docker hub
+      run: docker build . --file ./abc-frontend-app/Dockerfile --tag $DOCKER_USER/$FRONTEND_REPO_NAME:$(date +%s)
+    - name: Docker Push
+      run: docker push $DOCKER_USER/$FRONTEND_REPO_NAME:$(date +%s)
+      
+    - name: Build the product Docker image # push The image to the docker hub
+      run: docker build . --file ./abc-product-backend-app/Dockerfile --tag $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:$(date +%s)
+    - name: Docker Push
+      run: docker push $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:$(date +%s)
