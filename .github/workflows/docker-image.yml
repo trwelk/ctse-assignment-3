@@ -80,8 +80,8 @@ jobs:
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
         kubectl get pods -o wide
-        sed -i 's/trwelk\/abc-frontend-app/'"$FRONTEND_IMAGE:$TAG"'/' ./kustomization.yaml
-        sed -i 's/trwelk\/abc-product-backend-app/'"$BACKEND_IMAGE:$TAG"'/' ./kustomization.yaml
+        sed -i 's@trwelk/abc-frontend-app@'"$FRONTEND_IMAGE:$TAG"'@' ./kustomization.yaml
+        sed -i 's@trwelk/abc-product-backend-app@'"$BACKEND_IMAGE:$TAG"'@' ./kustomization.yaml
         ./kustomize build ./ | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide
