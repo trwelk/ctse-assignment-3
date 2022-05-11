@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: abc-frontend-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: abc-frontend-app
+  ports:
+    - port: 3000
+      targetPort: 3000

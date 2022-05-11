@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abc-frontend-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: abc-frontend-app
+  template:
+    metadata:
+      labels:
+        app: abc-frontend-app
+    spec:
+      containers:
+        - name: abc-frontend-app
+          image: FRONTEND/IMAGE
+          ports:
+            - containerPort: 3000
+          resources:
+          #cpu and memory limit
+            limits:
+              memory: "1084Mi"
+              cpu: "1000m"
+# kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.2.0/deploy/static/provider/cloud/deploy.yaml
