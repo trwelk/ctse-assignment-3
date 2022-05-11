@@ -12,7 +12,7 @@ env:
   GKE_CLUSTER: ctse-abc-cluster	
   GKE_ZONE: us-central1	   # TODO: update to cluster zone
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
-  K8S_FOLDER: ./K8S
+  K8S_FOLDER: K8S
   FRONTEND_IMAGE: ${{secrets.DOCKER_USER}}/abc-frontend-app
   BACKEND_IMAGE: ${{secrets.DOCKER_USER}}/abc-product-backend-app
 jobs:
