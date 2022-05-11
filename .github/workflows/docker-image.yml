@@ -30,5 +30,5 @@ jobs:
       with:
         context: ./abc-product-backend-app
         push: true
-        tags: $DOCKER_USER/$PRODUCT_BACKEND_REPO_NAME:latest
+        tags: ${{secrets.DOCKER_USER}}/abc-product-backend-app:latest
 
