@@ -73,7 +73,7 @@ jobs:
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
         ls
-        working-directory: ${{ env.K8S_FOLDER }}
+      working-directory: ${{ env.K8S_FOLDER }}
 
       # Deploy the Docker image to the GKE cluster
     - name: Deploy
