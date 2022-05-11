@@ -16,7 +16,7 @@ jobs:
         docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
 
     - name: set now
-      run: echo "::set-env name=TAG::v$(date +'%Y%m%d.%H%M%S')"
+      run: echo "TAG=v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
       
     - name: Build frontend image and push to Docker Hub and GitHub Container Registry
       uses: docker/build-push-action@v2
