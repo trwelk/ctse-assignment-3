@@ -6,6 +6,7 @@ env:
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   FRONTEND_REPO_NAME: abc-frontend-app
   PRODUCT_BACKEND_REPO_NAME: abc-product-backend-app
+  TAG: $(date +%s)
 jobs:
   push-image-to-docker-hub-and-deploy:  # job name
     runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
@@ -22,7 +23,7 @@ jobs:
       with:
         context: ./abc-frontend-app
         push: true
-        tags: ${{secrets.DOCKER_USER}}/abc-frontend-app:$(date +%s)
+        tags: ${{secrets.DOCKER_USER}}/${{ env.FRONTEND_REPO_NAME }}:${{ env.TAG }}
         
       
     - name: Build product image and push to Docker Hub and GitHub Container Registry
@@ -30,5 +31,5 @@ jobs:
       with:
         context: ./abc-product-backend-app
         push: true
-        tags: ${{secrets.DOCKER_USER}}/abc-product-backend-app:$(date +%s)
+        tags: ${{secrets.DOCKER_USER}}/${{ env.PRODUCT_BACKEND_REPO_NAME }}:${{ env.TAG }}
 
