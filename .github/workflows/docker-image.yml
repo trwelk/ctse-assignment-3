@@ -22,7 +22,7 @@ jobs:
       with:
         context: ./abc-frontend-app
         push: true
-        tags: $DOCKER_USER/$FRONTEND_REPO_NAME:latest
+        tags: ${{secrets.DOCKER_USER}}/abc-frontend-app:latest
         
       
     - name: Build product image and push to Docker Hub and GitHub Container Registry
