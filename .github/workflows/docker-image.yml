@@ -82,7 +82,7 @@ jobs:
         ls
         sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./kustomization.yaml
         sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./kustomization.yaml        
-        kubectl apply --kustomize
+        kubectl apply -k ./
         kubectl get pods -o wide
       working-directory: ${{ env.K8S_FOLDER }}
 
