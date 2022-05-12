@@ -2,7 +2,7 @@ name: This a workflow title
 on: [push] # When pushing to any branch then run this action
 # Env variable
 env:
-  DOCKER_USER: trwelk
+  DOCKER_USER: ${{ secrets.DOCKER_USER }}
   DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
   GKE_EMAIL: ${{secrets.GKE_EMAIL}}
   FRONTEND_REPO_NAME: abc-frontend-app
@@ -13,8 +13,8 @@ env:
   GKE_ZONE: us-central1	   # TODO: update to cluster zone
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
   K8S_FOLDER: k8s
-  FRONTEND_IMAGE: trwelk/abc-frontend-app:latest
-  BACKEND_IMAGE: trwelk/abc-product-backend-app:latest
+  FRONTEND_IMAGE: trwelk/abc-frontend-app
+  BACKEND_IMAGE: trwelk/abc-product-backend-app
 jobs:
   push-image-to-docker-hub-and-deploy:  # job name
     runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
