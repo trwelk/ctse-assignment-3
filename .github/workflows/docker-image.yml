@@ -82,6 +82,7 @@ jobs:
         kubectl get pods -o wide
         sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./kustomization.yaml
         sed -i 's@trwelk/abc-product-backend-app@$BACKEND_IMAGE:$TAG@' ./kustomization.yaml
+        cat ./kustomization.yaml
         ./kustomize build ./ | kubectl apply -f -
         kubectl get services -o wide
       working-directory: ${{ env.K8S_FOLDER }}
