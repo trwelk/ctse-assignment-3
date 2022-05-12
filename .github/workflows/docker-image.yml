@@ -81,10 +81,8 @@ jobs:
         gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
         ls
         sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./kustomization.yaml
-        sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./kustomization.yaml
-        cat ./kustomization.yaml
-        
-        kubectl apply -k
+        sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./kustomization.yaml        
+        kubectl apply --kustomize
         kubectl get pods -o wide
       working-directory: ${{ env.K8S_FOLDER }}
 
