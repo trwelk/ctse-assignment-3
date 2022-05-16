@@ -1,0 +1,14 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- abc-supplier-backend-app-deployment.yaml
+- abc-supplier-backend-app-service.yaml
+- abc-order-backend-app-deployment.yaml
+- abc-order-backend-app-service.yaml
+- ingress-service.yaml
+
+images:
+- name: ORDER/BACKEND/IMAGE
+  newName: ramolk/abc-order-backend-app
+- name: SUPPLIER/BACKEND/IMAGE
+  newName: ramolk/abc-supplier-backend-app
