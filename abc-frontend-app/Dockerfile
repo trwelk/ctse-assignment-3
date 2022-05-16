@@ -1,18 +1,20 @@
-# get the base node image
+# geting the base node image
 FROM node:17-alpine
 
-# set the working dir for container
+# setting the working dir for container
 WORKDIR /app
 
-# copy the json file first
+# copying the json file first
 COPY ./package.json /app
 
-# install npm dependencies
+# installing  dependencies
+# adding flag because of version bumping issues
 RUN npm install  --legacy-peer-deps
 
-# copy other project files
+# copying all other project files
 COPY . .
 
+# Set environment variable for 
 ENV REACT_APP_NODE_BACKEND_URL=/api
 EXPOSE 3000
 

@@ -16,10 +16,11 @@ function createData(productId, productName) {
 const useStyles = makeStyles((theme) => ({
     pageContainer: {
         width: '100%',
-        minHeight: '83vh',
-        height:'auto',
+        minHeight: '91vh',
+        height:'91vh',
         overflow: 'auto',
-        backgroundColor: '#f9f9f9'
+        backgroundColor: 'white',
+        boxShadow: 'rgb(0 0 0 / 20%) 0px 3px 3px -2px, rgb(0 0 0 / 14%) 0px 3px 4px 0px, rgb(0 0 0 / 12%) 0px 1px 8px 0px'
 
     },
     tableColumn: {
@@ -44,8 +45,8 @@ const useStyles = makeStyles((theme) => ({
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
     [`&.${tableCellClasses.head}`]: {
-        backgroundColor: Colors.primary,
-        color: theme.palette.common.white,
+        backgroundColor: 'white',
+        color: theme.palette.common.black,
         height: 53
 
     },
@@ -67,7 +68,7 @@ function ProductSideList({ data, selectProduct }) {
     return (
         <div className={classes.pageContainer} >
             <Table className={classes.table} aria-label="simple table">
-                <TableHead>
+            <TableHead style={{borderBottom: '9px double #d3d3d3'}}>
                     <TableRow>
                         <StyledTableCell className={classes.tableColumn}>Product Id</StyledTableCell>
                         <StyledTableCell className={classes.tableColumn} align="right">Product Name</StyledTableCell>

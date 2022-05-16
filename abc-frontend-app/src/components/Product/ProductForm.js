@@ -61,9 +61,9 @@ export default function ProductForm({setData ,  data}) {
         <Grid item xs={12} sm={6}>
           <TextField
             required
-            id="unitOfMeasurement"
-            name="unitOfMeasurement"
-            label="Unit Of Measurement"
+            id="stockLocation"
+            name="stockLocation"
+            label="Storage location"
             fullWidth
             onChange={handleChange}
             value={data.unitOfMeasurement}

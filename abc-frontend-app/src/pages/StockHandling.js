@@ -1,7 +1,7 @@
 import { makeStyles } from "@mui/styles";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SplitterLayout from "react-splitter-layout";
+import div from "react-splitter-layout";
 import ProductDialog from "../components/Product/ProductDialog";
 import ProductHeader from "../components/Product/ProductHeader";
 import ProductSideList from "../components/Product/ProductSideList";
@@ -13,7 +13,6 @@ import {
 
   onProductSelect, updateProduct
 } from "../redux/actions/ProductActions";
-import "../util/splitter.css";
 
 function StockHandling() {
   const dispatch = useDispatch();
@@ -28,7 +27,7 @@ function StockHandling() {
     productName: "",
     productType: "",
     description: "",
-    unitOfMeasurement: "",
+    stockLocation: "",
   });
   var Products = globalState.productSlice.Products
     ? globalState.productSlice.Products
@@ -73,12 +72,17 @@ function StockHandling() {
   };
 
   const handleDelete = () => {
-    dispatch(deleteProduct(product));
+    dispatch(deleteProduct(selectedProduct));
   };
   console.log('121212',product)
   return (
-    <SplitterLayout percentage secondaryInitialSize={75}>
+    <div className={classes.pageContainer} >
+            <div className={classes.masterContainer}> 
+
       <ProductSideList data={Products} selectProduct={selectProduct} />
+      </div>
+      <div className={classes.divider} ></div>
+
       <div className={classes.detailContainer}>
         <ProductHeader
           data={Products.find(prod => prod.selected) ? Products.find(prod => prod.selected) : null }
@@ -93,7 +97,7 @@ function StockHandling() {
           data={dialogMode == "NEW" ? product : selectedProduct }
         />
       </div>
-    </SplitterLayout>
+    </div>
   );
 }
 
@@ -102,25 +106,21 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     flexDirection: "row",
     width: "100%",
+    height:'91vh',
+    background:'#7080902b'
   },
   masterContainer: {
     width: "20%",
-    top: 0,
-    bottom: 0,
-    backgroundColor: "lightblue",
-    marginBottom: "-101%",
-    paddingBottom: "101%",
-  },
-  detail: {
-    width: "80%",
-    backgroundColor: "lightgray",
-    height: "200px",
-    height: "auto",
-    minHeight: "100vh",
   },
   detailContainer: {
+    width: "80%",
     padding: "10px",
+    overflowY:'auto'
   },
+  divider: {
+    height:'100%',
+    width: '10px'
+  }
 }));
 
 export default StockHandling;

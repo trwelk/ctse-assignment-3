@@ -80,7 +80,7 @@ export default function StockForm({setData ,  data}) {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
 
         <DesktopDatePicker
-          label="Date desktop"
+          label="Recieved Date"
           id="recievedDate"
           name="recievedDate"
           inputFormat="MM/dd/yyyy"
@@ -96,30 +96,6 @@ export default function StockForm({setData ,  data}) {
         <Divider  />
         <Divider  />
         <Divider  />
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="deflectionFromIdealHarvest"
-            name="deflectionFromIdealHarvest"
-            label="Deflection From Ideal Harvest Day"
-            value={data.deflectionFromIdealHarvest}
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <TextField
-            required
-            id="daysSinceHarvested"
-            name="daysSinceHarvested"
-            label="No Of Days Since Harvested"
-            value={data.daysSinceHarvested}
-            onChange={handleChange}
-            fullWidth
-            variant="standard"
-          />
-        </Grid>
       </Grid>
     </React.Fragment>
   );

@@ -6,7 +6,6 @@ const router = new Router({
 });
 
 router.post('/', async ctx => {
-    console.log('trwel')
     try {
         //validate req.body data before saving
         let { productId, productName, productType, description, unitOfMeasurement, stocks , unitPrice} = ctx.request.body;

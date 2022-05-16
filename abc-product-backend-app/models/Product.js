@@ -6,7 +6,7 @@ const ProductSchema = new Schema({
     productName: String,
     productType: String,
     description: String,
-    unitOfMeasurement: String,
+    stockLocation: String,
     stocks: [{
       type: Schema.Types.ObjectId,
       ref: 'Stock'

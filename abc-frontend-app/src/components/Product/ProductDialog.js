@@ -13,7 +13,7 @@ export default function ProductDialog({open , handleSubmit,  handleDialogClose, 
         productName: "",
         productType: "",
         description: "",
-        unitOfMeasurement: "",
+        stockLocation: "",
       });
     
     useEffect(() => {
@@ -30,7 +30,7 @@ export default function ProductDialog({open , handleSubmit,  handleDialogClose, 
         open={open}
         onClose={handleDialogClose}
       >
-        <DialogTitle>Optional sizes</DialogTitle>
+        <DialogTitle>Product</DialogTitle>
         <DialogContent>
         <ProductForm data={product} setData={setProduct}/>
           

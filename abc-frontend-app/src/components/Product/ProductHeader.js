@@ -106,14 +106,6 @@ function ProductHeader({ data, handleDelete, handleDialogOpen }) {
               variant="standard"
               InputProps={{ readOnly: true, disableUnderline: true }}
             />
-            <TextField
-              className={classes.headerTextField}
-              id="standard-read-only-input"
-              label="Unit Of Measurment"
-              value={data? data.unitOfMeasurement: ""}
-              variant="standard"
-              InputProps={{ readOnly: true, disableUnderline: true }}
-            />
             <div className={classes.headerTextField}></div>
           </div>
         </Paper>

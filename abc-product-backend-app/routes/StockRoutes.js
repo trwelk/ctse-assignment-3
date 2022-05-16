@@ -14,12 +14,7 @@ router.post('/', async ctx => {
 
    try {
       //validate data as required
-      console.log('tre1.0',ctx.request.body)
-
       const stock = new Stock(ctx.request.body);
-      console.log('tre1',stock)
-
-
       await stock.save();
 
       const product = await Product.findById({ _id: stock.product })
