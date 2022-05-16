@@ -2,8 +2,8 @@ name: This a workflow title
 on: [push] # When pushing to any branch then run this action
 # Env variable
 env:
-  RYAN_DOCKER_USER: ${{ secrets.DOCKER_USER }}
-  RYAN_DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+  DOCKER_USER: ${{ secrets.RYAN_DOCKER_USER }}
+  DOCKER_PASSWORD: ${{secrets.RYAN_DOCKER_PASSWORD}}
   GKE_EMAIL: ${{secrets.GKE_EMAIL}}
   ORDER_BACKEND_REPO_NAME: abc-order-backend-app
   supplier_BACKEND_REPO_NAME: abc-supplier-backend-app
