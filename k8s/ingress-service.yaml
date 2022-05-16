@@ -23,3 +23,17 @@ spec:
                 name: abc-product-backend-app-service
                 port:
                   number: 9090
+          - path: /api/order/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: abc-order-backend-app-service
+                port:
+                  number: 9090
+          - path: /api/supplier/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: abc-product-backend-app-service
+                port:
+                  number: 9090
