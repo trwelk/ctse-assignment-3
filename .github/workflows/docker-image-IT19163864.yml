@@ -1,5 +1,8 @@
-name: This a workflow title 
-on: [push] # When pushing to any branch then run this action
+name: IT19163864 Pipeline
+on:
+  push:
+    branches:
+      - main
 # Env variable
 env:
   DOCKER_USER: ${{ secrets.RYAN_DOCKER_USERNAME }}

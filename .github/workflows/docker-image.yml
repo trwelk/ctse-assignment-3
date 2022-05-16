@@ -1,5 +1,8 @@
 name: IT19187006 Pipeline 
-on: [push] # When pushing to any branch then run this action
+on:
+  push:
+    branches:
+      - main
 # Env variable
 env:
   DOCKER_USER: ${{ secrets.DOCKER_USER }}
