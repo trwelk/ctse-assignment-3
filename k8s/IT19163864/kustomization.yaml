@@ -9,6 +9,6 @@ resources:
 
 images:
 - name: ORDER/BACKEND/IMAGE
-  newName: ramolk/abc-order-backend-app
+  newName: ryanmlk/abc-order-backend-app
 - name: SUPPLIER/BACKEND/IMAGE
-  newName: ramolk/abc-supplier-backend-app
+  newName: ryanmlk/abc-supplier-backend-app

@@ -16,8 +16,8 @@ env:
   GKE_ZONE: us-central1	   # TODO: update to cluster zone
   DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
   K8S_FOLDER: k8s
-  ORDER_BACKEND_IMAGE: ramolk/abc-order-backend-app
-  SUPPLIER_BACKEND_IMAGE: ramolk/abc-supplier-backend-app
+  ORDER_BACKEND_IMAGE: ryanmlk/abc-order-backend-app
+  SUPPLIER_BACKEND_IMAGE: ryanmlk/abc-supplier-backend-app
 jobs:
   push-image-to-docker-hub-and-deploy:  # job name
     runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
@@ -82,8 +82,8 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
-        sed -i 's@ramolk/abc-order-backend-app@'$ORDER_BACKEND_IMAGE:$TAG'@' ./IT19163864/kustomization.yaml
-        sed -i 's@ramolk/abc-supplier-backend-app@'$SUPPLIER_BACKEND_IMAGE:$TAG'@' ./IT19163864/kustomization.yaml       
+        sed -i 's@ryanmlk/abc-order-backend-app@'$ORDER_BACKEND_IMAGE:$TAG'@' ./IT19163864/kustomization.yaml
+        sed -i 's@ryanmlk/abc-supplier-backend-app@'$SUPPLIER_BACKEND_IMAGE:$TAG'@' ./IT19163864/kustomization.yaml       
         kubectl kustomize ./IT19163864
         kubectl apply -k ./IT19163864
       working-directory: ${{ env.K8S_FOLDER }}
