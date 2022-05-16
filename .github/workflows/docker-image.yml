@@ -1,4 +1,4 @@
-name: This a workflow title 
+name: IT19187006 Pipeline 
 on: [push] # When pushing to any branch then run this action
 # Env variable
 env:
@@ -85,12 +85,3 @@ jobs:
         kubectl apply -k ./IT19187006
       working-directory: ${{ env.K8S_FOLDER }}
 
-    # # Deploy the Docker image to the GKE cluster
-    # - name: Deploy
-    #   run: |-
-    #     # replacing the image name in the k8s template
-    #     ./kustomize edit set image PRODUCT/BACKEND/IMAGE=${{env.DOCKER_USER}}/${{ env.PRODUCT_BACKEND_REPO_NAME }}:${{ env.TAG }}
-    #     ./kustomize edit set image FRONTEND/IMAGE=${{env.DOCKER_USER}}/${{ env.FRONTEND_REPO_NAME }}:${{ env.TAG }}
-    #     ./kustomize build . | kubectl apply -f -
-    #     kubectl rollout status deployment/$DEPLOYMENT_NAME
-    #     kubectl get pods -o wide
