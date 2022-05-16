@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: abc-supplier-backend-app-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: abc-supplier-backend-app
+  template:
+    metadata:
+      labels:
+        app: abc-supplier-backend-app
+    spec:
+      containers:
+        - name: abc-supplier-backend-app
+          image: SUPPLIER/BACKEND/IMAGE
+          ports:
+            - containerPort: 9090
+          resources:
+          #cpu and memory limit
+            limits:
+              memory: "1084Mi"
+              cpu: "1000m"
