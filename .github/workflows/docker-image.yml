@@ -79,10 +79,10 @@ jobs:
     - name: Deploy
       run: |
         gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
-        sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./kustomization.yaml
-        sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./kustomization.yaml       
-        kubectl kustomize ./
-        kubectl apply -k ./
+        sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./IT19187006/kustomization.yaml
+        sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./IT19187006/kustomization.yaml       
+        kubectl kustomize ./IT19187006
+        kubectl apply -k ./IT19187006
       working-directory: ${{ env.K8S_FOLDER }}
 
     # # Deploy the Docker image to the GKE cluster
