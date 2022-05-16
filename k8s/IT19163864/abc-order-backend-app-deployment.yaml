@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: abc-product-backend-app-deployment
+  name: abc-order-backend-app-deployment
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: abc-product-backend-app
+      app: abc-order-backend-app
   template:
     metadata:
       labels:
-        app: abc-product-backend-app
+        app: abc-order-backend-app
     spec:
       containers:
-        - name: abc-product-backend-app
-          image: PRODUCT/BACKEND/IMAGE
+        - name: abc-order-backend-app
+          image: ORDER/BACKEND/IMAGE
           ports:
             - containerPort: 9090
           resources:

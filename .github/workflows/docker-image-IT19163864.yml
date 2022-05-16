@@ -6,7 +6,7 @@ env:
   DOCKER_PASSWORD: ${{secrets.RYAN_DOCKER_PASSWORD}}
   GKE_EMAIL: ${{secrets.GKE_EMAIL}}
   ORDER_BACKEND_REPO_NAME: abc-order-backend-app
-  supplier_BACKEND_REPO_NAME: abc-supplier-backend-app
+  SUPPLIER_BACKEND_REPO_NAME: abc-supplier-backend-app
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: ctse-abc-cluster	
@@ -62,7 +62,7 @@ jobs:
       with:
         context: ./abc-supplier-backend-app
         push: true
-        tags: ${{env.DOCKER_USER}}/${{ env.ORDER_BACKEND_REPO_NAME }}:${{ env.TAG }}
+        tags: ${{env.DOCKER_USER}}/${{ env.SUPPLIER_BACKEND_REPO_NAME }}:${{ env.TAG }}
 
 
 
