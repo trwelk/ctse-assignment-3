@@ -1,0 +1,78 @@
+name: IT19206660 Pipeline
+on:
+  push:
+    branches:
+      - main
+# Env variable
+env:
+  DOCKER_USER: ${{ secrets.UDITH_DOCKER_USERNAME }}
+  DOCKER_PASSWORD: ${{secrets.UDITH_DOCKER_PASSWORD}}
+  GKE_EMAIL: ${{secrets.GKE_EMAIL}}
+  CUSTOMER_BACKEND_REPO_NAME: abc-customer-backend-app
+  PROJECT_ID: ${{ secrets.GKE_PROJECT }}
+  GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
+  GKE_CLUSTER: ctse-abc-cluster	
+  GKE_ZONE: us-central1	   # TODO: update to cluster zone
+  DEPLOYMENT_NAME: gke-test # TODO: update to deployment name
+  K8S_FOLDER: k8s
+  CUSTOMER_BACKEND_IMAGE: udithkavdoc/abc-customer-backend-app
+  SUPPLIER_BACKEND_IMAGE: udithkavdoc/abc-supplier-backend-app
+jobs:
+  push-image-to-docker-hub-and-deploy:  # job name
+    runs-on: ubuntu-latest  # runner name : (ubuntu latest version) 
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+      
+    steps:
+    - uses: actions/checkout@v2 # first action : checkout source code
+    - name: docker login
+      run: | # log into docker hub account
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD  
+
+
+    - id: 'auth'
+      name: 'Authenticate to Google Cloud'
+      uses: 'google-github-actions/auth@v0'
+      with:
+        token_format: 'access_token'
+        workload_identity_provider: 'projects/779162537615/locations/global/workloadIdentityPools/my-pool/providers/my-provider'
+        service_account: ${{secrets.GKE_EMAIL}}
+
+    # Get the GKE credentials so we can deploy to the cluster
+    - name: Set up GKE credentials
+      uses: google-github-actions/get-gke-credentials@v0
+      with:
+        cluster_name: ${{ env.GKE_CLUSTER }}
+        location: ${{ env.GKE_ZONE }}
+    
+
+    - name: set now
+      run: echo "TAG=v$(date +'%Y%m%d.%H%M%S')" >> $GITHUB_ENV
+      
+    - name: Build customer backend image and push to Docker Hub and GitHub Container Registry
+      uses: docker/build-push-action@v2
+      with:
+        context: ./abc-customer-backend-app
+        push: true
+        tags: ${{env.DOCKER_USER}}/${{ env.CUSTOMER_BACKEND_REPO_NAME }}:${{ env.TAG }}
+        
+
+
+    # Set up kustomize
+    - name: Set up Kustomize
+      run: |-
+        curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
+        chmod u+x ./kustomize
+        ls
+      working-directory: ${{ env.K8S_FOLDER }}
+
+      # Deploy the Docker image to the GKE cluster
+    - name: Deploy
+      run: |
+        gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
+        sed -i 's@udithkavdoc/abc-customer-backend-app@'$CUSTOMER_BACKEND_IMAGE:$TAG'@' ./IT19206660/kustomization.yaml
+        kubectl kustomize ./IT19206660
+        kubectl apply -k ./IT19206660
+      working-directory: ${{ env.K8S_FOLDER }}
