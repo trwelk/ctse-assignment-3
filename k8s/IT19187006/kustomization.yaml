@@ -5,10 +5,14 @@ resources:
 - abc-frontend-app-service.yaml
 - abc-product-backend-app-deployment.yaml
 - abc-product-backend-app-service.yaml
+- abc-location-backend-app-deployment.yaml
+- abc-location-backend-app-service.yaml
 - ingress-service.yaml
 
 images:
 - name: PRODUCT/BACKEND/IMAGE
   newName: trwelk/abc-product-backend-app
+- name: LOCATION/BACKEND/IMAGE
+  newName: trwelk/abc-location-backend-app
 - name: FRONTEND/IMAGE
   newName: trwelk/abc-frontend-app

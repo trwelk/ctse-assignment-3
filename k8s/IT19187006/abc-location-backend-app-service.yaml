@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: abc-location-backend-app-service
+spec:
+  type: ClusterIP
+  selector:
+    app: abc-location-backend-app
+  ports:
+    - port: 9090
+      targetPort: 9090

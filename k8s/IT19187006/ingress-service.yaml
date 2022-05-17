@@ -37,3 +37,10 @@ spec:
                 name: abc-supplier-backend-app-service
                 port:
                   number: 9090
+          - path: /api/location/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: abc-location-backend-app-service
+                port:
+                  number: 9090

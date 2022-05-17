@@ -10,6 +10,7 @@ env:
   GKE_EMAIL: ${{secrets.GKE_EMAIL}}
   FRONTEND_REPO_NAME: abc-frontend-app
   PRODUCT_BACKEND_REPO_NAME: abc-product-backend-app
+  LOCATION_BACKEND_REPO_NAME: abc-location-backend-app
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GAR_LOCATION: us-central1 # TODO: update region of the Artifact Registry
   GKE_CLUSTER: ctse-abc-cluster	
@@ -67,6 +68,13 @@ jobs:
         push: true
         tags: ${{env.DOCKER_USER}}/${{ env.PRODUCT_BACKEND_REPO_NAME }}:${{ env.TAG }}
 
+    - name: Build location image and push to Docker Hub and GitHub Container Registry
+      uses: docker/build-push-action@v2
+      with:
+        context: ./abc-location-backend-app
+        push: true
+        tags: ${{env.DOCKER_USER}}/${{ env.LOCATION_BACKEND_REPO_NAME }}:${{ env.TAG }}
+
 
 
 
@@ -84,6 +92,7 @@ jobs:
         gcloud container clusters get-credentials $GKE_CLUSTER --zone=$GKE_ZONE --project=$PROJECT_ID
         sed -i 's@trwelk/abc-frontend-app@'$FRONTEND_IMAGE:$TAG'@' ./IT19187006/kustomization.yaml
         sed -i 's@trwelk/abc-product-backend-app@'$BACKEND_IMAGE:$TAG'@' ./IT19187006/kustomization.yaml       
+        sed -i 's@trwelk/abc-location-backend-app@'$BACKEND_IMAGE:$TAG'@' ./IT19187006/kustomization.yaml       
         kubectl kustomize ./IT19187006
         kubectl apply -k ./IT19187006
       working-directory: ${{ env.K8S_FOLDER }}
